@@ -1,0 +1,43 @@
+//=== Colors
+$color-white: #fff;
+$color-light: #828282;
+$color-dark: #000;
+$bg-light: #fff;
+$bg-dark: #f6f6f6;
+$bg-black: #000;
+
+//=== Operations with fonts
+@mixin font-face($font-name, $path) {
+   @font-face {
+      font-family: quote($font-name);
+      src: url($path + '.woff') format('woff');
+      src: url($path + '.woff2') format('woff2');
+      src: url($path + '.ttf') format('truetype');
+   }
+}
+
+//=== Operations with media queries
+$phone: 320;
+$tablet: 712;
+$small-desktop: 1024;
+$large-desktop: 1280;
+@mixin media-phone {
+   @media only screen and (min-width: $phone * 1px) {
+      @content;
+   }
+}
+@mixin media-tablet {
+   @media only screen and (min-width: $tablet * 1px) {
+      @content;
+   }
+}
+@mixin media-small-desktop {
+   @media only screen and (min-width: $small-desktop * 1px) {
+      @content;
+   }
+}
+@mixin media-large-desktop {
+   @media only screen and (min-width: $large-desktop * 1px) {
+      @content;
+   }
+}
