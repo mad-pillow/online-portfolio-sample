@@ -9,6 +9,7 @@ const path = {
       img: projectFolder + '/images/',
       fonts: projectFolder + '/fonts/',
       icons: projectFolder + '/iconsprite/',
+      fav: projectFolder + '/favicon/',
    },
    source: {
       html: sourceFolder + '/',
@@ -17,6 +18,7 @@ const path = {
       img: sourceFolder + '/images/',
       fonts: sourceFolder + '/fonts/',
       icons: sourceFolder + '/icons/',
+      fav: sourceFolder + '/favicon/',
    },
 };
 
@@ -97,6 +99,11 @@ gulp.task('fontscopy', function () {
    return gulp.src(path.source.fonts + '*.ttf').pipe(gulp.dest(path.build.fonts));
 });
 
+//Get favicons
+gulp.task('favicons', function () {
+   return gulp.src(path.source.fav + '**').pipe(gulp.dest(path.build.fav));
+});
+
 //Watch changes
 gulp.task('watch', function () {
    browserSync.init({
@@ -114,6 +121,8 @@ gulp.task('watch', function () {
    gulp.watch(path.source.html + '*.html').on('change', browserSync.reload);
    //Watch new images
    gulp.watch(path.source.img + '**', gulp.series('img-compress'));
+   //Watch new favicons
+   gulp.watch(path.source.fav + '**', gulp.series('favicons'));
    //Watch new fonts
    gulp.watch(path.source.fonts + '**', gulp.series('delFonts', 'fontscopy', 'fonts'));
 });
@@ -132,5 +141,12 @@ gulp.task('fonts', function () {
 
 gulp.task(
    'default',
-   gulp.series('del', 'fonts', 'fontscopy', gulp.parallel('styles', 'html', 'scripts', 'img-compress'), 'watch'),
+   gulp.series(
+      'del',
+      'fonts',
+      'fontscopy',
+      'favicons',
+      gulp.parallel('styles', 'html', 'scripts', 'img-compress'),
+      'watch',
+   ),
 );

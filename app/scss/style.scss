@@ -269,9 +269,9 @@ section:nth-child(1n + 2) {
       height: 478px;
 
       background-image: url('../images/hero-s.jpg');
-      object-fit: cover;
       background-position: center;
       background-repeat: no-repeat;
+      background-size: cover;
 
       @include media-tablet {
          height: 400px;

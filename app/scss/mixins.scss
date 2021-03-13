@@ -1,10 +1,10 @@
 //=== Colors
 $color-white: #fff;
-$color-light: #828282;
-$color-dark: #000;
+$color-light: #8c2336;
+$color-dark: #0d0d0d;
 $bg-light: #fff;
-$bg-dark: #f6f6f6;
-$bg-black: #000;
+$bg-dark: #f2f2f2; // #f6f6f6;
+$bg-black: #0d0d0d;
 
 //=== Operations with fonts
 @mixin font-face($font-name, $path) {
