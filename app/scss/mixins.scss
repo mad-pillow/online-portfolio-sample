@@ -13,6 +13,7 @@ $bg-black: #0d0d0d;
       src: url($path + '.woff') format('woff');
       src: url($path + '.woff2') format('woff2');
       src: url($path + '.ttf') format('truetype');
+      font-display: swap;
    }
 }
 

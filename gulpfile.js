@@ -25,7 +25,8 @@ const path = {
 // Attach gulp modules
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const jsFiles = [path.source.js + 'goup.js', path.source.js + 'main.js'];
+const jsFiles = [/* path.source.js + 'goup.js', */ path.source.js + 'main.js']; // files which should be concatenated
+const jsFilesAddition = [path.source.js + 'aux/*.js'];
 const htmlFiles = [path.source.html + '*.html', '!' + path.source.html + '_*.html'];
 const cleanCSS = require('gulp-clean-css');
 const cleanCSSlevel = 2; //0,1,2
@@ -56,7 +57,13 @@ gulp.task('styles', function () {
 
 //Task for JS
 gulp.task('scripts', function () {
-   return gulp.src(jsFiles).pipe(concat('script.js')).pipe(gulp.dest(path.build.js)).pipe(browserSync.stream());
+   return gulp
+      .src(jsFiles)
+      .pipe(concat('script.js'))
+      .pipe(gulp.dest(path.build.js))
+      .pipe(gulp.src(jsFilesAddition))
+      .pipe(gulp.dest(path.build.js))
+      .pipe(browserSync.stream());
 });
 
 //Task for HTML
