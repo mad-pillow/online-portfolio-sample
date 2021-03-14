@@ -8,5 +8,3 @@ The page is deployed here - [https://mad-pillow.github.io/Landing-N201201/](http
 
 **Notes for myself**  
 To do list  
-1. Rework burger menu thoroughly;
-2. Implement language change functionalty;

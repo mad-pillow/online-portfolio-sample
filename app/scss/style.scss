@@ -1,8 +1,7 @@
 @import 'mixins';
-@import 'normalize';
 @import 'goup';
-@include font-face(g-medium, '../fonts/Gilroy-Medium');
-@include font-face(g-bold, '../fonts/Gilroy-Bold');
+@include font-face(g-medium, '../assets/fonts/Gilroy-Medium');
+@include font-face(g-bold, '../assets/fonts/Gilroy-Bold');
 
 //-----------------------  Common
 
@@ -268,7 +267,7 @@ section:nth-child(1n + 2) {
       min-width: 260px;
       height: 478px;
 
-      background-image: url('../images/hero-600w.jpg');
+      background-image: url('../assets/images/hero-600w.jpg');
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -276,7 +275,7 @@ section:nth-child(1n + 2) {
       @include media-tablet {
          height: 400px;
 
-         background-image: url('../images/hero-1900w.jpg');
+         background-image: url('../assets/images/hero-1900w.jpg');
       }
    }
 }

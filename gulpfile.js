@@ -1,32 +1,33 @@
-// Issue files' paths
-const projectFolder = 'dist';
+// Paths
+const projectName = 'MP_Resume';
+const projectFolder = 'dist/' + projectName;
 const sourceFolder = 'app';
 const path = {
    build: {
       html: projectFolder + '/',
       css: projectFolder + '/css/',
       js: projectFolder + '/js/',
-      img: projectFolder + '/images/',
-      fonts: projectFolder + '/fonts/',
-      icons: projectFolder + '/iconsprite/',
-      fav: projectFolder + '/favicon/',
+      img: projectFolder + '/assets/images/',
+      fonts: projectFolder + '/assets/fonts/',
+      icons: projectFolder + '/assets/iconsprite/',
+      fav: projectFolder + '/assets/favicon/',
    },
    source: {
-      html: sourceFolder + '/',
+      html: sourceFolder + '/html/',
       css: sourceFolder + '/scss/',
       js: sourceFolder + '/js/',
-      img: sourceFolder + '/images/',
-      fonts: sourceFolder + '/fonts/',
-      icons: sourceFolder + '/icons/',
-      fav: sourceFolder + '/favicon/',
+      img: sourceFolder + '/assets/images/',
+      fonts: sourceFolder + '/assets/fonts/',
+      icons: sourceFolder + '/assets/icons/',
+      fav: sourceFolder + '/assets/favicon/',
    },
 };
 
 // Attach gulp modules
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const jsFiles = [/* path.source.js + 'goup.js', */ path.source.js + 'main.js']; // files which should be concatenated
-const jsFilesAddition = [path.source.js + 'aux/*.js'];
+const jsFiles = [path.source.js + 'main.js']; // JS files which should be concatenated
+const jsFilesAux = [path.source.js + 'aux/*.js'];
 const htmlFiles = [path.source.html + '*.html', '!' + path.source.html + '_*.html'];
 const cleanCSS = require('gulp-clean-css');
 const cleanCSSlevel = 2; //0,1,2
@@ -52,6 +53,8 @@ gulp.task('styles', function () {
       .pipe(cleanCSS({ level: cleanCSSlevel }))
       .pipe(rename({ extname: '.min.css' }))
       .pipe(gulp.dest(path.build.css))
+      .pipe(gulp.src(path.source.css + '*.css'))
+      .pipe(gulp.dest(path.build.css))
       .pipe(browserSync.stream());
 });
 
@@ -61,7 +64,7 @@ gulp.task('scripts', function () {
       .src(jsFiles)
       .pipe(concat('script.js'))
       .pipe(gulp.dest(path.build.js))
-      .pipe(gulp.src(jsFilesAddition))
+      .pipe(gulp.src(jsFilesAux))
       .pipe(gulp.dest(path.build.js))
       .pipe(browserSync.stream());
 });
@@ -73,7 +76,18 @@ gulp.task('html', function () {
 
 //Task for cleaning folders
 gulp.task('del', function () {
-   return del([projectFolder + '/**', projectFolder + '!.gitignore', projectFolder + '!.git']);
+   return del([
+      `!${projectFolder}README.md`,
+      `!${projectFolder}*.png`,
+      '!' + projectFolder + '.gitignore',
+      '!' + projectFolder + '.git',
+      path.build.js + '*',
+      path.build.css + '*',
+      path.build.img + '*',
+      path.build.fonts + '*',
+      path.build.icons + '*',
+      path.build.fav + '*',
+   ]);
 });
 
 //Task for cleaning fonts
